@@ -1,15 +1,16 @@
 import 'dart:async';
 
-import 'package:auth_flow_app/features/auth/domain/repositories/session_repository.dart';
-import 'package:auth_flow_app/features/auth/presentation/bloc/session/session_event.dart';
-import 'package:auth_flow_app/features/auth/presentation/bloc/session/session_state.dart';
+import '../../../domain/repositories/session_repository.dart';
+import 'session_event.dart';
+import 'session_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SessionBloc extends Bloc<SessionEvent, SessionState> {
   final SessionRepository sessionRepository;
   StreamSubscription? _authStateSubscription;
 
-  SessionBloc({required this.sessionRepository}) : super(const SessionInitial()) {
+  SessionBloc({required this.sessionRepository})
+    : super(const SessionInitial()) {
     on<CheckAuthStatusEvent>(_onCheckAuthStatus);
     on<SignOutEvent>(_onSignOut);
     on<AuthStateChangedEvent>(_onAuthStateChanged);

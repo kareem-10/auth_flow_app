@@ -1,6 +1,6 @@
-import 'package:auth_flow_app/features/auth/domain/repositories/phone_auth_repository.dart';
-import 'package:auth_flow_app/features/auth/presentation/bloc/phone_auth/phone_auth_event.dart';
-import 'package:auth_flow_app/features/auth/presentation/bloc/phone_auth/phone_auth_state.dart';
+import '../../../domain/repositories/phone_auth_repository.dart';
+import 'phone_auth_event.dart';
+import 'phone_auth_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class PhoneAuthBloc extends Bloc<PhoneAuthEvent, PhoneAuthState> {
@@ -18,7 +18,9 @@ class PhoneAuthBloc extends Bloc<PhoneAuthEvent, PhoneAuthState> {
   ) async {
     emit(const PhoneAuthLoading());
 
-    final result = await phoneAuthRepository.sendOTP(phoneNumber: event.phoneNumber);
+    final result = await phoneAuthRepository.sendOTP(
+      phoneNumber: event.phoneNumber,
+    );
 
     result.fold(
       (failure) => emit(PhoneAuthError(message: failure.message)),

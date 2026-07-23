@@ -1,6 +1,6 @@
-import 'package:auth_flow_app/features/auth/domain/repositories/email_auth_repository.dart';
-import 'package:auth_flow_app/features/auth/presentation/bloc/email_auth/email_auth_event.dart';
-import 'package:auth_flow_app/features/auth/presentation/bloc/email_auth/email_auth_state.dart';
+import '../../../domain/repositories/email_auth_repository.dart';
+import 'email_auth_event.dart';
+import 'email_auth_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class EmailAuthBloc extends Bloc<EmailAuthEvent, EmailAuthState> {

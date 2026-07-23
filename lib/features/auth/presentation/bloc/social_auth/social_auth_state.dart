@@ -1,4 +1,4 @@
-import 'package:auth_flow_app/features/auth/domain/entities/user_entity.dart';
+import '../../../domain/entities/user_entity.dart';
 import 'package:equatable/equatable.dart';
 
 abstract class SocialAuthState extends Equatable {

@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:auth_flow_app/features/auth/domain/entities/user_entity.dart';
+import '../../../domain/entities/user_entity.dart';
 
 abstract class SessionEvent extends Equatable {
   const SessionEvent();

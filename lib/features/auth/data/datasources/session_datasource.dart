@@ -1,4 +1,4 @@
-import 'package:auth_flow_app/features/auth/data/models/user_model.dart';
+import '../models/user_model.dart';
 
 abstract class SessionDataSource {
   Future<UserModel?> getCurrentUser();

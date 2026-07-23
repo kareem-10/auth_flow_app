@@ -1,7 +1,7 @@
-import 'package:auth_flow_app/core/error/exceptions.dart';
-import 'package:auth_flow_app/features/auth/data/datasources/auth_client.dart';
-import 'package:auth_flow_app/features/auth/data/datasources/session_datasource.dart';
-import 'package:auth_flow_app/features/auth/data/models/user_model.dart';
+import '../../../../core/error/exceptions.dart';
+import 'auth_client.dart';
+import 'session_datasource.dart';
+import '../models/user_model.dart';
 
 class SessionDataSourceImpl implements SessionDataSource {
   final AuthClient _authClient;

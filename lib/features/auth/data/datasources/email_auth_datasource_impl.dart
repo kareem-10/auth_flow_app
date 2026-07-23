@@ -1,7 +1,7 @@
-import 'package:auth_flow_app/core/error/exceptions.dart';
-import 'package:auth_flow_app/features/auth/data/datasources/auth_client.dart';
-import 'package:auth_flow_app/features/auth/data/datasources/email_auth_datasource.dart';
-import 'package:auth_flow_app/features/auth/data/models/user_model.dart';
+import '../../../../core/error/exceptions.dart';
+import 'auth_client.dart';
+import 'email_auth_datasource.dart';
+import '../models/user_model.dart';
 
 class EmailAuthDataSourceImpl implements EmailAuthDataSource {
   final AuthClient _authClient;

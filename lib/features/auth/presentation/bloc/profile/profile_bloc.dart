@@ -1,12 +1,13 @@
-import 'package:auth_flow_app/features/auth/domain/repositories/profile_repository.dart';
-import 'package:auth_flow_app/features/auth/presentation/bloc/profile/profile_event.dart';
-import 'package:auth_flow_app/features/auth/presentation/bloc/profile/profile_state.dart';
+import '../../../domain/repositories/profile_repository.dart';
+import 'profile_event.dart';
+import 'profile_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   final ProfileRepository profileRepository;
 
-  ProfileBloc({required this.profileRepository}) : super(const ProfileInitial()) {
+  ProfileBloc({required this.profileRepository})
+    : super(const ProfileInitial()) {
     on<UpdateProfileEvent>(_onUpdateProfile);
     on<UploadProfilePictureEvent>(_onUploadProfilePicture);
     on<DeleteAccountEvent>(_onDeleteAccount);

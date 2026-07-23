@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:auth_flow_app/core/di/injection_container.dart';
-import 'package:auth_flow_app/features/auth/presentation/bloc/session/session_bloc.dart';
-import 'package:auth_flow_app/features/auth/presentation/bloc/session/session_event.dart';
-import 'package:auth_flow_app/features/auth/presentation/bloc/session/session_state.dart';
-import 'package:auth_flow_app/features/auth/presentation/screens/home_screen.dart';
-import 'package:auth_flow_app/features/auth/presentation/screens/login_screen.dart';
-import 'package:auth_flow_app/features/auth/presentation/screens/signup_screen.dart';
+import 'core/di/injection_container.dart';
+import 'features/auth/presentation/bloc/session/session_bloc.dart';
+import 'features/auth/presentation/bloc/session/session_event.dart';
+import 'features/auth/presentation/bloc/session/session_state.dart';
+import 'features/auth/presentation/screens/home_screen.dart';
+import 'features/auth/presentation/screens/login_screen.dart';
+import 'features/auth/presentation/screens/signup_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -50,9 +50,7 @@ class AuthWrapper extends StatelessWidget {
       builder: (context, state) {
         if (state is SessionLoading || state is SessionInitial) {
           return const Scaffold(
-            body: Center(
-              child: CircularProgressIndicator(),
-            ),
+            body: Center(child: CircularProgressIndicator()),
           );
         } else if (state is Authenticated) {
           return const HomePage();

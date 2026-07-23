@@ -1,6 +1,6 @@
-import 'package:auth_flow_app/features/auth/domain/repositories/social_auth_repository.dart';
-import 'package:auth_flow_app/features/auth/presentation/bloc/social_auth/social_auth_event.dart';
-import 'package:auth_flow_app/features/auth/presentation/bloc/social_auth/social_auth_state.dart';
+import '../../../domain/repositories/social_auth_repository.dart';
+import 'social_auth_event.dart';
+import 'social_auth_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SocialAuthBloc extends Bloc<SocialAuthEvent, SocialAuthState> {

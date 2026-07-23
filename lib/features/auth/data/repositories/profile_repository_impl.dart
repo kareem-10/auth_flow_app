@@ -1,16 +1,15 @@
 import 'package:dartz/dartz.dart';
-import 'package:auth_flow_app/core/error/exceptions.dart';
-import 'package:auth_flow_app/core/error/failures.dart';
-import 'package:auth_flow_app/features/auth/data/datasources/profile_datasource.dart';
-import 'package:auth_flow_app/features/auth/domain/entities/user_entity.dart';
-import 'package:auth_flow_app/features/auth/domain/repositories/profile_repository.dart';
+import '../../../../core/error/exceptions.dart';
+import '../../../../core/error/failures.dart';
+import '../datasources/profile_datasource.dart';
+import '../../domain/entities/user_entity.dart';
+import '../../domain/repositories/profile_repository.dart';
 
 class ProfileRepositoryImpl implements ProfileRepository {
   final ProfileDataSource _profileDataSource;
 
-  ProfileRepositoryImpl({
-    required ProfileDataSource profileDataSource,
-  }) : _profileDataSource = profileDataSource;
+  ProfileRepositoryImpl({required ProfileDataSource profileDataSource})
+    : _profileDataSource = profileDataSource;
 
   @override
   Future<Either<Failure, UserEntity>> updateProfile({

@@ -1,7 +1,7 @@
-import 'package:auth_flow_app/core/di/injection_container.dart';
-import 'package:auth_flow_app/features/auth/presentation/bloc/email_auth/email_auth_bloc.dart';
-import 'package:auth_flow_app/features/auth/presentation/bloc/email_auth/email_auth_event.dart';
-import 'package:auth_flow_app/features/auth/presentation/bloc/email_auth/email_auth_state.dart';
+import '../../../../core/di/injection_container.dart';
+import '../bloc/email_auth/email_auth_bloc.dart';
+import '../bloc/email_auth/email_auth_event.dart';
+import '../bloc/email_auth/email_auth_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
