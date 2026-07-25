@@ -19,4 +19,12 @@ class AuthClientImpl implements AuthClient {
       data: {'name': name},
     );
   }
+
+  @override
+  Future<AuthResponse> signIn({
+    required String email,
+    required String password,
+  }) async {
+    return await client.signInWithPassword(email: email, password: password);
+  }
 }
