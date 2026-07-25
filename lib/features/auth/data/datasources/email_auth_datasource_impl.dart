@@ -20,7 +20,7 @@ class EmailAuthDataSourceImpl implements EmailAuthDataSource {
         password: password,
         name: name,
       );
-      if (response.user != null) {
+      if (response.user == null) {
         throw AuthException('Sign up failed no user returned');
       }
       return UserModel.fromSupabaseUser(response.user!);
@@ -37,8 +37,14 @@ class EmailAuthDataSourceImpl implements EmailAuthDataSource {
     required String password,
   }) async {
     try {
-      // TODO: Implement signInWithEmail
-      throw UnimplementedError('signInWithEmail not implemented yet');
+      final response = await _authClient.signIn(
+        email: email,
+        password: password,
+      );
+      if (response.user == null) {
+        throw AuthException('Sign in failed no user returned');
+      }
+      return UserModel.fromSupabaseUser(response.user!);
     } on AuthException {
       rethrow;
     } catch (e) {
