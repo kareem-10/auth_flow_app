@@ -1,5 +1,5 @@
 import '../../../../core/error/exceptions.dart';
-import 'auth_client.dart';
+import '../../../../core/network/supabase/auth_client.dart';
 import 'profile_datasource.dart';
 import '../models/user_model.dart';
 

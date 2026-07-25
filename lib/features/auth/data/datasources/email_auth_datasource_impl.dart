@@ -1,5 +1,5 @@
 import '../../../../core/error/exceptions.dart';
-import 'auth_client.dart';
+import '../../../../core/network/supabase/auth_client.dart';
 import 'email_auth_datasource.dart';
 import '../models/user_model.dart';
 
@@ -12,10 +12,18 @@ class EmailAuthDataSourceImpl implements EmailAuthDataSource {
   Future<UserModel> signUpWithEmail({
     required String email,
     required String password,
+    required String name,
   }) async {
     try {
-      // TODO: Implement signUpWithEmail
-      throw UnimplementedError('signUpWithEmail not implemented yet');
+      final response = await _authClient.signUp(
+        email: email,
+        password: password,
+        name: name,
+      );
+      if (response.user != null) {
+        throw AuthException('Sign up failed no user returned');
+      }
+      return UserModel.fromSupabaseUser(response.user!);
     } on AuthException {
       rethrow;
     } catch (e) {

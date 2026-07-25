@@ -1,5 +1,7 @@
-import '../../features/auth/data/datasources/auth_client.dart';
-import '../../features/auth/data/datasources/auth_client_stub.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+
+import '../network/supabase/auth_client.dart';
+import '../network/supabase/auth_client_impl.dart';
 import '../../features/auth/data/datasources/email_auth_datasource.dart';
 import '../../features/auth/data/datasources/email_auth_datasource_impl.dart';
 import '../../features/auth/data/datasources/phone_auth_datasource.dart';
@@ -30,7 +32,9 @@ import 'package:get_it/get_it.dart';
 final sl = GetIt.instance;
 
 Future<void> initDependencies() async {
-  sl.registerLazySingleton<AuthClient>(() => AuthClientStub());
+  sl.registerLazySingleton<AuthClient>(
+    () => AuthClientImpl(Supabase.instance.client.auth),
+  );
 
   sl.registerLazySingleton<EmailAuthDataSource>(
     () => EmailAuthDataSourceImpl(sl()),

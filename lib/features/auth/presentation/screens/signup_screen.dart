@@ -29,12 +29,14 @@ class _SignupViewState extends State<SignupView> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
+  final _nameController = TextEditingController();
 
   @override
   void dispose() {
     _emailController.dispose();
     _passwordController.dispose();
     _confirmPasswordController.dispose();
+    _nameController.dispose();
     super.dispose();
   }
 
@@ -95,6 +97,22 @@ class _SignupViewState extends State<SignupView> {
                   ),
                   const SizedBox(height: 16),
                   TextFormField(
+                    controller: _nameController,
+                    decoration: const InputDecoration(
+                      labelText: 'Name',
+                      border: OutlineInputBorder(),
+                      prefixIcon: Icon(Icons.person),
+                    ),
+                    keyboardType: TextInputType.name,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter your name';
+                      }
+                      return null;
+                    },
+                  ),
+                  const SizedBox(height: 16),
+                  TextFormField(
                     controller: _passwordController,
                     decoration: const InputDecoration(
                       labelText: 'Password',
@@ -139,6 +157,7 @@ class _SignupViewState extends State<SignupView> {
                           SignUpWithEmailEvent(
                             email: _emailController.text.trim(),
                             password: _passwordController.text,
+                            name: _nameController.text,
                           ),
                         );
                       }

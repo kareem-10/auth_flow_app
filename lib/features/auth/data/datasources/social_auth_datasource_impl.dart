@@ -1,7 +1,7 @@
 import '../../../../core/error/exceptions.dart';
 import '../models/user_model.dart';
 import 'social_auth_datasource.dart';
-import 'auth_client.dart';
+import '../../../../core/network/supabase/auth_client.dart';
 
 class SocialAuthDataSourceImpl implements SocialAuthDataSource {
   final AuthClient _authClient;

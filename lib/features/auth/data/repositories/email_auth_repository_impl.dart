@@ -15,11 +15,13 @@ class EmailAuthRepositoryImpl implements EmailAuthRepository {
   Future<Either<Failure, UserEntity>> signUpWithEmail({
     required String email,
     required String password,
+    required String name,
   }) async {
     try {
       final user = await _emailAuthDataSource.signUpWithEmail(
         email: email,
         password: password,
+        name: name,
       );
       return Right(user);
     } on AuthException catch (e) {
