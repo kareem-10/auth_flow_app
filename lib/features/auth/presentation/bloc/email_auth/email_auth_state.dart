@@ -34,11 +34,20 @@ class EmailAuthError extends EmailAuthState {
   List<Object?> get props => [message];
 }
 
-class EmailSent extends EmailAuthState {
+class PasswordResetOtpSent extends EmailAuthState {
+  final String email;
   final String message;
 
-  const EmailSent({required this.message});
+  const PasswordResetOtpSent({required this.message, required this.email});
 
   @override
   List<Object?> get props => [message];
+}
+
+class PasswordResetOtpVerify extends EmailAuthState {}
+
+class PasswordUpdated extends EmailAuthState {
+  final String message;
+
+  const PasswordUpdated({required this.message});
 }

@@ -1,3 +1,5 @@
+import 'package:auth_flow_app/features/auth/domain/entities/user_entity.dart';
+
 import '../../../../core/error/exceptions.dart';
 import '../../../../core/network/supabase/auth_client.dart';
 import 'email_auth_datasource.dart';
@@ -55,8 +57,7 @@ class EmailAuthDataSourceImpl implements EmailAuthDataSource {
   @override
   Future<void> resetPassword({required String email}) async {
     try {
-      // TODO: Implement resetPassword
-      throw UnimplementedError('resetPassword not implemented yet');
+      await _authClient.resetPasswordForEmail(email: email);
     } on AuthException {
       rethrow;
     } catch (e) {
@@ -65,10 +66,30 @@ class EmailAuthDataSourceImpl implements EmailAuthDataSource {
   }
 
   @override
-  Future<void> verifyEmail({required String token}) async {
+  Future<UserModel> verifyPasswordRestOtp({
+    required String email,
+    required String otp,
+  }) async {
     try {
-      // TODO: Implement verifyEmail
-      throw UnimplementedError('verifyEmail not implemented yet');
+      final response = await _authClient.verifyPasswordResetOtp(
+        email: email,
+        otp: otp,
+      );
+      if (response.user == null) {
+        throw AuthException('Verify OTP Failed - invalidate OTP or Expire');
+      }
+      return UserModel.fromSupabaseUser(response.user!);
+    } on AuthException {
+      rethrow;
+    } catch (e) {
+      throw ServerException('Failed to verify email: ${e.toString()}');
+    }
+  }
+
+  @override
+  Future<void> updatePassword({required String password}) async {
+    try {
+      await _authClient.updatePassword(password: password);
     } on AuthException {
       rethrow;
     } catch (e) {
