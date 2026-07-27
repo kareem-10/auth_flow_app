@@ -19,7 +19,7 @@ class SignUpWithEmailEvent extends EmailAuthEvent {
   });
 
   @override
-  List<Object?> get props => [email, password];
+  List<Object?> get props => [email, password, name];
 }
 
 class SignInWithEmailEvent extends EmailAuthEvent {
