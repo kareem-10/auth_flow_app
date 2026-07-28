@@ -1,3 +1,5 @@
+import 'package:google_sign_in/google_sign_in.dart';
+
 import '../../../../core/error/exceptions.dart';
 import '../models/user_model.dart';
 import 'social_auth_datasource.dart';
@@ -6,13 +8,33 @@ import '../../../../core/network/supabase/auth_client.dart';
 class SocialAuthDataSourceImpl implements SocialAuthDataSource {
   final AuthClient _authClient;
 
+  final GoogleSignIn _googleSignIn = GoogleSignIn.instance;
+
+  bool _isInitialized = false;
+
   SocialAuthDataSourceImpl(this._authClient);
+
+  Future ensureInitialized() async {
+    if (_isInitialized) return;
+    await _googleSignIn.initialize(
+      serverClientId:
+          '250934022543-jmiq25k4l065hc6dgtlelva1scab93rl.apps.googleusercontent.com',
+    );
+    _isInitialized = true;
+  }
 
   @override
   Future<UserModel> signInWithGoogle() async {
     try {
-      // TODO: Implement signInWithGoogle
-      throw UnimplementedError('signInWithGoogle not implemented yet');
+      await ensureInitialized();
+      final GoogleSignInAccount googleUser = await _googleSignIn.authenticate();
+
+      return UserModel(
+        id: googleUser.id,
+        email: googleUser.email,
+        isEmailVerified: true,
+        createdAt: DateTime.now(),
+      );
     } on AuthException {
       rethrow;
     } catch (e) {
