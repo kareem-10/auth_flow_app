@@ -4,6 +4,7 @@ import '../../../../core/error/exceptions.dart';
 import '../models/user_model.dart';
 import 'social_auth_datasource.dart';
 import '../../../../core/network/supabase/auth_client.dart';
+import 'package:supabase_flutter/supabase_flutter.dart' hide AuthException;
 
 class SocialAuthDataSourceImpl implements SocialAuthDataSource {
   final AuthClient _authClient;
@@ -29,12 +30,22 @@ class SocialAuthDataSourceImpl implements SocialAuthDataSource {
       await ensureInitialized();
       final GoogleSignInAccount googleUser = await _googleSignIn.authenticate();
 
-      return UserModel(
-        id: googleUser.id,
-        email: googleUser.email,
-        isEmailVerified: true,
-        createdAt: DateTime.now(),
+      final idToken = googleUser.authentication.idToken;
+
+      if (idToken == null) {
+        throw ServerException('Google authentication failed');
+      }
+
+      final authResponse = await _authClient.signInWithIdToken(
+        OAuthProvider.google,
+        idToken,
       );
+
+      if (authResponse.user == null) {
+        throw AuthException('Failed to sign in with Google');
+      }
+
+      return UserModel.fromSupabaseUser(authResponse.user!);
     } on AuthException {
       rethrow;
     } catch (e) {

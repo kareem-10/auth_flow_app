@@ -49,4 +49,12 @@ class AuthClientImpl implements AuthClient {
   Future<UserResponse> updatePassword({required String password}) async {
     return await client.updateUser(UserAttributes(password: password));
   }
+
+  @override
+  Future<AuthResponse> signInWithIdToken(
+    OAuthProvider provider,
+    String idToken,
+  ) async {
+    return await client.signInWithIdToken(provider: provider, idToken: idToken);
+  }
 }
