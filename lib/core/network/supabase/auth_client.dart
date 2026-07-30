@@ -25,4 +25,6 @@ abstract class AuthClient {
     OAuthProvider provider,
     String idToken,
   );
+
+  Future<bool> signInWithOAuth(OAuthProvider provider, String callbackUrl);
 }
