@@ -57,4 +57,16 @@ class AuthClientImpl implements AuthClient {
   ) async {
     return await client.signInWithIdToken(provider: provider, idToken: idToken);
   }
+
+  @override
+  Future<bool> signInWithOAuth(
+    OAuthProvider provider,
+    String callbackUrl,
+  ) async {
+    return await client.signInWithOAuth(
+      provider,
+      redirectTo: callbackUrl,
+      authScreenLaunchMode: LaunchMode.externalApplication,
+    );
+  }
 }
