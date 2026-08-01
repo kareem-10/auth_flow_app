@@ -27,4 +27,11 @@ abstract class AuthClient {
   );
 
   Future<bool> signInWithOAuth(OAuthProvider provider, String callbackUrl);
+
+  Future<void> signInWithOtp({required String phoneNumber});
+
+  Future<AuthResponse> verifyOtp({
+    required String phoneNumber,
+    required String otp,
+  });
 }
