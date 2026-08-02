@@ -2,6 +2,7 @@ import '../../../../core/error/exceptions.dart';
 import '../../../../core/network/supabase/auth_client.dart';
 import 'session_datasource.dart';
 import '../models/user_model.dart';
+import 'package:supabase_flutter/supabase_flutter.dart' hide AuthException;
 
 class SessionDataSourceImpl implements SessionDataSource {
   final AuthClient _authClient;
@@ -21,8 +22,7 @@ class SessionDataSourceImpl implements SessionDataSource {
   @override
   Future<void> signOut() async {
     try {
-      // TODO: Implement signOut
-      throw UnimplementedError('signOut not implemented yet');
+      await _authClient.signOut();
     } on AuthException {
       rethrow;
     } catch (e) {
@@ -32,7 +32,9 @@ class SessionDataSourceImpl implements SessionDataSource {
 
   @override
   Stream<UserModel?> get authStateChanges {
-    // TODO: Implement authStateChanges
-    throw UnimplementedError('authStateChanges not implemented yet');
+    return _authClient.onAuthStateChange.map((authState) {
+      final User? user = authState.session?.user;
+      return user != null ? UserModel.fromSupabaseUser(user) : null;
+    });
   }
 }
