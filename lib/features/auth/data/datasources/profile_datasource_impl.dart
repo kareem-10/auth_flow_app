@@ -80,8 +80,7 @@ class ProfileDataSourceImpl implements ProfileDataSource {
   @override
   Future<void> deleteAccount() async {
     try {
-      // TODO: Implement deleteAccount
-      throw UnimplementedError('deleteAccount not implemented yet');
+      await _authClient.deleteAccount();
     } on AuthException {
       rethrow;
     } catch (e) {

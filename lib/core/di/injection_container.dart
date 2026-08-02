@@ -35,7 +35,10 @@ final sl = GetIt.instance;
 
 Future<void> initDependencies() async {
   sl.registerLazySingleton<AuthClient>(
-    () => AuthClientImpl(Supabase.instance.client.auth),
+    () => AuthClientImpl(
+      Supabase.instance.client.auth,
+      Supabase.instance.client.functions,
+    ),
   );
 
   sl.registerLazySingleton<StorageClient>(

@@ -5,8 +5,9 @@ import 'auth_client.dart';
 
 class AuthClientImpl implements AuthClient {
   final GoTrueClient client;
+  final FunctionsClient functions;
 
-  AuthClientImpl(this.client);
+  AuthClientImpl(this.client, this.functions);
   @override
   Future<AuthResponse> signUp({
     required String email,
@@ -101,5 +102,15 @@ class AuthClientImpl implements AuthClient {
   @override
   Future<UserResponse> updateUser(UserAttributes attributes) async {
     return await client.updateUser(attributes);
+  }
+
+  @override
+  Future<void> deleteAccount() async {
+    final response = await functions.invoke('delete-account');
+    await client.signOut(scope: SignOutScope.global);
+
+    if (response.status != 200) {
+      throw const AuthException('Failed to delete account');
+    }
   }
 }
