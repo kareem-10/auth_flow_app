@@ -1,7 +1,7 @@
 import '../models/user_model.dart';
 
 abstract class SessionDataSource {
-  Future<UserModel?> getCurrentUser();
+  UserModel? getCurrentUser();
 
   Future<void> signOut();
 

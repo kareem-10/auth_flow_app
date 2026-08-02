@@ -34,4 +34,6 @@ abstract class AuthClient {
     required String phoneNumber,
     required String otp,
   });
+
+  User? get getCurrentUser;
 }

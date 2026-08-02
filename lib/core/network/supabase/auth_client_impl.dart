@@ -86,4 +86,7 @@ class AuthClientImpl implements AuthClient {
       type: OtpType.sms,
     );
   }
+
+  @override
+  User? get getCurrentUser => client.currentUser;
 }
