@@ -34,4 +34,12 @@ abstract class AuthClient {
     required String phoneNumber,
     required String otp,
   });
+
+  User? get getCurrentUser;
+
+  Future<void> signOut();
+
+  Stream<AuthState> get onAuthStateChange;
+
+  Future<UserResponse> updateUser(UserAttributes attributes);
 }

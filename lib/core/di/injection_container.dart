@@ -1,3 +1,5 @@
+import 'package:auth_flow_app/core/network/supabase/storage_client.dart';
+import 'package:auth_flow_app/core/network/supabase/storage_client_impl.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../network/supabase/auth_client.dart';
@@ -36,6 +38,10 @@ Future<void> initDependencies() async {
     () => AuthClientImpl(Supabase.instance.client.auth),
   );
 
+  sl.registerLazySingleton<StorageClient>(
+    () => StorageClientImpl(Supabase.instance.client.storage),
+  );
+
   sl.registerLazySingleton<EmailAuthDataSource>(
     () => EmailAuthDataSourceImpl(sl()),
   );
@@ -49,7 +55,7 @@ Future<void> initDependencies() async {
     () => SessionDataSourceImpl(sl()),
   );
   sl.registerLazySingleton<ProfileDataSource>(
-    () => ProfileDataSourceImpl(sl()),
+    () => ProfileDataSourceImpl(sl(), sl()),
   );
 
   sl.registerLazySingleton<EmailAuthRepository>(
